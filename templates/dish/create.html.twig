@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+
+
+{% block title %}Create Dish{% endblock %}
+
+{# {% form_theme createForm 'bootstrap_5_layout.html.twig' %} #}
+
+
+
+{% block content %}
+<br/>
+<div class="container mt-5 ">
+    <div class="row"  >
+        <div class="col col-md-8 mx-auto ">
+
+            <div class="float-right mb-3">
+                <a href="{{path('dish.all')}}" type="button" class="btn btn-dark">Back to dishes</a>
+
+            </div>
+
+
+            {{form(createForm) }}
+          
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

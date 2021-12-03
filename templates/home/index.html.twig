@@ -1,0 +1,88 @@
+   {% extends "base.html.twig" %}
+
+   {% block content %}
+   
+  <div class="row">
+        <div class="col col-12 vincent_content vincent_corners">
+            <div class="owl-carousel vincent_slider1i vincent_slider_main ">
+                {# <div class="owl-item vincent_slider_main_item">
+                    <div class="vincent_slider_main_item_img">
+                        <div class=""><img src="img/pizza_1.png" alt=""></div>
+                    </div>
+                    <h1>Vincent </h1>
+                    <div class="vincent_slider_main_item_text">Italian Pizza With Cherry Tomatoes<br> and Green Basil </div>
+                </div> #}
+                {# <div class="owl-item vincent_slider_main_item vincent_slider_main_item1">
+                    <div class="vincent_slider_main_item_img">
+                        <div class=""><img src="img/pizza_2.png" alt=""></div>
+                    </div>
+                    <div class="vincent_slider_main_item_cont">
+                        <div class="vincent_item_cont">
+                            <h1>Vincent Pizza.</h1>
+                            <h2>Making people happy </h2>
+                            <div class="vincent_slider_main_item_text">Italian Pizza With Cherry Tomatoes and Green Basil </div>
+                            <a class="vincent_button" href="#">Book Now<i class="fa fa-angle-right" aria-hidden="true"></i></a>
+                            <a class="vincent_button vincent_button_background" href="menu1.html">View Menu<i class="fa fa-angle-right" aria-hidden="true"></i></a>
+                        </div>
+                    </div>
+                </div> #}
+                {% for c in carousels %}
+                    
+                <div class="owl-item vincent_slider_main_item vincent_slider_main_item1 vincent_slider_main_item2">
+                    <div class="vincent_slider_main_item_img">
+                        <div class=""><img src="{{asset('img/dish/' ~ c.image)}}" alt=""></div>
+                    </div>
+                    <div class="vincent_slider_main_item_cont">
+                        <div class="vincent_item_cont">
+                            <h1>{{c.name}}.</h1>
+                            <div class="vincent_slider_main_item_text">{{c.description}}</div>
+                            <a class="vincent_button" href="#">Book Now<i class="fa fa-angle-right" aria-hidden="true"></i></a>
+                            <a class="vincent_button vincent_button_background" href="menu1.html">View Menu<i class="fa fa-angle-right" aria-hidden="true"></i></a>
+                        </div>
+                    </div>
+
+                </div>
+                {% endfor %}
+                {# <div class="vincent_slider_main_item vincent_slider_main_item1 vincent_slider_main_item2 vincent_slider_main_item3">
+                    <img src="img/slide_2.jpg" alt="">
+                    <div class="vincent_slider_main_item_cont">
+                        <div class="vincent_item_cont">
+                            <h2>Making people happy </h2>
+                            <h1>Vincent Pizza.</h1>
+                            <div class="vincent_slider_main_item_text">Italian Pizza With Cherry Tomatoes and Green Basil </div>
+                            <a class="vincent_button vincent_button_background" href="menu1.html">View Menu<i class="fa fa-angle-right" aria-hidden="true"></i></a>
+                        </div>
+                    </div>
+
+                </div> #}
+            </div>
+          
+            <div class="vincent_hot_sales">
+                <div class="vincent_container vincent_menu1_block">
+                    <h2>Hot Sales</h2>
+                    <div class="row gutters">
+                    {% for hs in hotSells %}
+                        
+                        <div class="col col-3">
+                            <div class="vincent_menu1_block_item">
+                                <a href="product.html">
+                                    <div class="vincent_prod_list_image_cont">
+                                        <div class="vincent_prod_list_image_wrapper">
+                                            <img src="{{asset('img/dish/' ~ hs.image)}}" alt="">
+                                        </div>
+                                    </div>
+                                    <h5>{{hs.name}}</h5>
+                                    <p class="vincent_prod_list_text">{{hs.description}}</p>
+                                    <div class="vincent_prod_list_price fw-light text-decoration-line-through text-secondary mb-1"><span>CHF</span>{{hs.price}}</div>
+                                    <div class="vincent_prod_list_price"><span>CHF</span>{{hs.discountedPrice}}</div>
+                                </a>
+                            </div>
+                        </div>
+                    {% endfor %}
+                    
+                    </div>
+                </div>
+            </div>
+           
+
+    {% endblock %}
