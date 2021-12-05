@@ -3,19 +3,66 @@
 {% block title %}Menu{% endblock %}
 
 {% block content %}
+
+
+
  <div class="vincent_menu1_block">
+
                 <div class="vincent_container">
                     <div class="container">
                         <ul class="tabs vincent_menu_tabs">
-                            <li><a href="#first">Burgers</a></li>
-                            <li><a href="#second">Desserts</a></li>
-                            <li><a href="#third">Drinks</a></li>
-                            <li><a href="#forth">Pasta</a></li>
-                            <li><a class="active" href="#fifth">Pizzas</a></li>
-                            <li><a href="#sixth">Salads</a></li>
+                        {% for c in categories %}
+                            
+                            <li><a href="#{{c.id}}">{{c.name}}</a></li>
+                          
+                        {% endfor %}
+                          
                         </ul>
 
-                        <div id="first">
+                        {% for c in categories %}
+                        <div id="{{c.id}}">
+                       
+                            <div class="row gutters">
+
+                            {% for d in c.dish %}
+                                 <div class="col col-3">
+                                    <div class="vincent_menu1_block_item">
+                                        <div class="vincent_prod_list_image_cont">
+                                            <div class="vincent_prod_list_image_wrapper">
+                                                <div class="vincent_team_overlay"></div>
+                                                <img src="{{asset('img/dish/' ~ d.image)}}" alt="">
+                                                <a class="vincent_add_to_cart_button" href="product.html"></a>
+                                            </div>
+                                        </div>
+                                        <h5><a href="product.html">{{d.name}}</a></h5>
+                                        <p class="vincent_prod_list_text">{{d.description}}</p>
+                                        {% if d.discountedPrice > 0 %}
+                                        <div class="vincent_prod_list_price fw-light text-decoration-line-through text-secondary mb-1"><span>CHF</span>{{d.price}}</div>
+                                        <div class="vincent_prod_list_price"><span>CHF</span>{{d.discountedPrice}}</div>
+
+                                        {% else %}
+                                        <div class="vincent_prod_list_price"><span>CHF</span>{{d.price}}</div>
+                                            
+                                        {% endif %}
+                                        
+                                        
+                                    </div>
+                                </div>    
+                                
+                            {% endfor %}
+                         
+                                                 
+
+                                            
+
+
+
+
+                            </div> 
+                        </div>
+                        {% endfor %}
+
+                        {# <div id="first">
                             <div class="row gutters">
                                 <div class="col col-3">
                                     <div class="vincent_menu1_block_item">
@@ -732,7 +779,7 @@
 
 
                             </div>
-                        </div>
+                        </div> #}
                     </div>
                 </div>
             </div>
