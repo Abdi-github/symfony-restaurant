@@ -12,45 +12,45 @@ namespace App\Service;
 class QrCodeService
 {
 
-    //     protected $builder;
+    protected $builder;
 
-    //     public function __construct(BuilderInterface $builder)
-    //     {
-    //         $this->builder = $builder;
-    //     }
+    public function __construct(BuilderInterface $builder)
+    {
+        $this->builder = $builder;
+    }
 
-    //     public function qrcode($query, $baseUrl)
-    //     {
-
-
-
-    //         $url = $baseUrl . '?table=';
-
-    //         $lableString = 'Table ' . $query;
-
-    //         $path = dirname(__DIR__, 2) . '/public/img/';
-
-    //         // set qrcode
-    //         $result = $this->builder
-    //             ->data($url . $query)
-    //             ->encoding(new Encoding('UTF-8'))
-    //             ->errorCorrectionLevel(new ErrorCorrectionLevelHigh())
-    //             ->size(400)
-    //             ->margin(10)
-    //             ->labelText($lableString)
-    //             ->labelAlignment(new LabelAlignmentCenter())
-    //             ->labelMargin(new Margin(25, 5, 5, 5))
-    //             ->backgroundColor(new Color(221, 158, 3))
-
-    //             ->build();
-
-    //         //generate name
-    //         $namePng = 'table_' . $query  . uniqid('_', '') . '.png';
-
-    //         //Save img png
-    //         $result->saveToFile($path . 'qr-code/' . $namePng);
+    public function qrcode($query)
+    {
 
 
-    //         return $result->getDataUri();
-    //     }
+
+        $url = "https://swift-restaurant.herokuapp.com?table=";
+
+        $lableString = 'Table ' . $query;
+
+        $path = dirname(__DIR__, 2) . '/public/img/';
+
+        // set qrcode
+        $result = $this->builder
+            ->data($url . $query)
+            ->encoding(new Encoding('UTF-8'))
+            ->errorCorrectionLevel(new ErrorCorrectionLevelHigh())
+            ->size(400)
+            ->margin(10)
+            ->labelText($lableString)
+            ->labelAlignment(new LabelAlignmentCenter())
+            ->labelMargin(new Margin(25, 5, 5, 5))
+            ->backgroundColor(new Color(221, 158, 3))
+
+            ->build();
+
+        //generate name
+        $namePng = 'table_' . $query  . uniqid('_', '') . '.png';
+
+        //Save img png
+        $result->saveToFile($path . 'qr-code/' . $namePng);
+
+
+        return $result->getDataUri();
+    }
 }
