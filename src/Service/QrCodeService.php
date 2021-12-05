@@ -24,7 +24,7 @@ class QrCodeService
 
 
 
-        $url = "https://swift-restaurant.herokuapp.com?table=";
+        $url = "https://swift-restaurant.herokuapp.com/?table=";
 
         $lableString = 'Table ' . $query;
 
