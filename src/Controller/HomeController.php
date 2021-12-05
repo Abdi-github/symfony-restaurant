@@ -14,9 +14,9 @@ class HomeController extends AbstractController
     #[Route('/', name: 'home')]
     public function index(CarouselRepository $cr, DishRepository $dr, QrCodeService $qrs, $baseUrl): Response
     {
-        for ($query = 1; $query < 7; $query++) {
-            $qrs->qrcode($query, $baseUrl);
-        }
+        // for ($query = 1; $query < 7; $query++) {
+        //     $qrs->qrcode($query, $baseUrl);
+        // }
         $carousels = $cr->findBy(['status' => 1]);
         // \dd($carousels);
         $hotSells = $dr->getHotSells();
