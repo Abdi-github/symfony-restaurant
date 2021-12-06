@@ -12,11 +12,11 @@ use Symfony\Component\Routing\Annotation\Route;
 class HomeController extends AbstractController
 {
     #[Route('/', name: 'home')]
-    public function index(CarouselRepository $cr, DishRepository $dr, QrCodeService $qrs): Response
+    public function index(CarouselRepository $cr, DishRepository $dr): Response
     {
-        for ($query = 1; $query < 7; $query++) {
-            $qrs->qrcode($query);
-        }
+        // for ($query = 1; $query < 7; $query++) {
+        //     $qrs->qrcode($query);
+        // }
         $carousels = $cr->findBy(['status' => 1]);
         // \dd($carousels);
         $hotSells = $dr->getHotSells();
