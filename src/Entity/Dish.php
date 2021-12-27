@@ -53,6 +53,10 @@ class Dish
      */
     private $status = true;
 
+
+
+
+
     public function getId(): ?int
     {
         return $this->id;

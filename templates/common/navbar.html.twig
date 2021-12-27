@@ -1,6 +1,6 @@
 
- <header class="vincent_header vincent_absolute" style="height: 10vh" >
-        <div class="row ">
+ <header class="vincent_header vincent_absolute" style="height: 20vh"  >
+        <div class="row " >
             <div class="col col-3 vincent_header_left">
                 <div class="vincent_inner">
                     <div class="vincent_inner_h_contact">
@@ -13,28 +13,45 @@
                
                     <nav class="vincent_menu_cont">
                         <ul id="menu-main-menu" class="vincent_menu">
-                            <li class="menu-item active "><a href="{{path('home')}}">Welcome</a>
+                            <li class="menu-item active "><a href="{{path('home', {'table': app.session().get('table')})}}">Welcome</a>
                          
                             </li>
                             <li class="menu-item "><a href="{{path('menu')}}">Menu</a>
                              
                             </li>
-                            <li class=" menu-item "><a href="#">Orders</a>
                           
-                            </li>
-                            <li class="menu-item "><a href="#">About</a>
                            
+
+                           {% if app.user %}
+                           
+                                <li class="menu-item menu-item-has-children"><a href="{{path('admin')}}">Orders </a>
+                           {% endif %} 
+
+                           {% if app.user %}
+
+                             <li class="menu-item"><a href="{{path('app_logout')}}">Logout</a></li>
+                           {% else %}
+                             <li class="menu-item"><a href="{{path('app_login')}}">Login</a></li>       
+                           {% endif %} 
+                           
+
+                                {# <ul class="sub-menu">
+                                <li class="menu-item"><a href="{{path('app_register')}}">Register</a></li>                          
+                                    
+                                    
+                                <li class="menu-item"><a href="{{path('app_login')}}">Login</a></li>
+
+                            
+                              
+                                    <li class="menu-item"><a href="{{path('app_logout')}}">Logout</a></li>
+                                                             
+                                    
+                                </ul> #}
                             </li>
+                            
                    
-                            <li class="menu-item menu-item-has-children"><a href="#">Shop</a>
-                                <ul class="sub-menu">
-                                    <li class="menu-item"><a href="product-listing.html">Product Listing</a></li>
-                                    <li class="menu-item"><a href="single-product.html">Single Product</a></li>
-                                    <li class="menu-item"><a href="cart.html">Cart</a></li>
-                                    <li class="menu-item"><a href="checkout.html">Checkout</a></li>
-                                </ul>
-                            </li>
-                            <li class="menu-item "><a href="#">Contact</a>
+                     
+                           
                           
                             </li>
                         </ul>
@@ -49,8 +66,16 @@
 						<span class="vincent_menu_line3"></span>
 					</a>
                 </div>
+
+                
             </div>
+      			{{render(controller('App\\Controller\\CartsController::getCartItems'))}} 
+     
+
+
          
         </div>
+
+      
     </header>
 

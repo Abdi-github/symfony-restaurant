@@ -1,6 +1,8 @@
    {% extends "base.html.twig" %}
 
    {% block content %}
+
+
    
   <div class="row">
         <div class="col col-12 vincent_content vincent_corners">
@@ -56,6 +58,8 @@
 
                 </div> #}
             </div>
+
+          
           
             <div class="vincent_hot_sales">
                 <div class="vincent_container vincent_menu1_block">
@@ -65,7 +69,7 @@
                         
                         <div class="col col-3">
                             <div class="vincent_menu1_block_item">
-                                <a href="product.html">
+                                <a href="{{path('dish.detail', {'dish': hs.id})}}">
                                     <div class="vincent_prod_list_image_cont">
                                         <div class="vincent_prod_list_image_wrapper">
                                             <img src="{{asset('img/dish/' ~ hs.image)}}" alt="">
@@ -83,6 +87,8 @@
                     </div>
                 </div>
             </div>
+
+            
            
 
     {% endblock %}

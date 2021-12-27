@@ -1,0 +1,121 @@
+{% extends 'base.html.twig' %}
+
+{% block js %}
+	<!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-5G6PPWB');</script>
+  <!-- End Google Tag Manager -->
+{% endblock %}
+
+ {% block content %}
+
+<div class="vincent_title_block vincent_corners" style="margin-top: 5rem;">
+		<div class="vincent_inner_text">
+			<h1>Cart</h1>
+		</div>
+	</div>
+ <div class="vincent_container vincent_typography">
+		<div class="row gutters">
+     
+			<div class="col col-9 mx-auto vincent_content">
+				<table class="vincent_cart">
+					<thead>
+						<tr>
+							<th></th>
+							<th></th>
+							<th>Dish</th>
+							<th>Extra</th>
+							<th><span>Price</span></th>
+							<th>Quantity</th>
+							<th><span>Sub Total</span></th>
+						</tr>
+					</thead>
+					<tbody>
+                  {# <pre>
+					  {{ dump(carts) }}
+				  </pre> #}
+        
+                 
+
+                    {% for item in carts %}
+
+
+                    
+                        
+						<tr class="vincent_cart_item cart_display_items cart_page">
+							<td  >
+                            {# <input class="cart_remove_btn" type="hidden" value="removecart-{{item.product_id}}" /> #}
+								{# <button   style="background-color: black; font-size: 1.5rem;"   onclick="removeCart()"> × </button> #}
+								<a href="{{path('remove.cart', {'table_no': app.session.get('table') ,'product_id':item.productId})}}"  > × </a>
+							</td>
+							<td class="vincent_product-thumbnail">
+								<a href="single-product.html">
+									{# <img src="{{asset('img/dish/' ~ item.image )}}" alt=""> #}
+									<img src="{{asset('img/dish/' ~ item.image )}}" alt="">
+								</a>
+							</td>
+							<td class="vincent_product-name" data-title="Dish">
+								<a href="single-product.html">{{item.productName}}</a>
+							</td>
+							<td class="vincent_product-name" data-title="Extra">
+                            {% if item.exCheese != 'None' %}
+								<span>Cheese {{item.exCheese}}</span>
+                            {% endif %} <br>
+                            {% if item.exOnion() != 'None' %}
+								<span>Onion {{item.exOnion}}</span>
+                            {% endif %}
+                            
+							</td>
+							<td class="vincent_product-price" data-title="Price">
+								{# <span>CHF <span class="product_selling_price">{{item.price}}</span></span> #}
+								<span>CHF <span class="product_selling_price">{{item.price}}</span></span>
+							</td>
+							<td  class="vincent_product-quantity"  data-title="Quantity">
+                            {# <div class="input-group mb-3"> #}
+                            <input type ="hidden" class="updated_product_id" value="{{item.productId}}" />
+                            <input type ="hidden" class="table_no_update" value="{{app.session.get('table')}}" />
+  <input type="number"  class=" qty_update form-control w-25 vincent_quantity text-light" min="1" value="{{item.quantity}}"  >
+ 
+{# </div> #}
+								{# <input type="number"   min="1" value="{{item.quantity}}" name="quantity" class=" vincent_quantity"> #}
+							</td>
+							<td class="vincent_product-subtotal" data-title="Sub Total">
+								<span class='item_subtotal_price' >CHF {{item.getSubTotal()}}</span>
+							</td>
+						</tr>
+                    {% endfor %}
+					
+					</tbody>
+				</table>
+				<div class="vincent_cart_totals">
+					<h5>Cart totals</h5>
+					<table>
+						<tbody>
+						
+							<tr>
+								<th>Total</th>
+								<td><span id="total_price_cart">CHF {{total_price}}</span></td>
+							</tr>
+						</tbody>
+					</table>
+                    
+					<form action="{{path('order')}}">
+					<input type="hidden" name="table_no" value="{{app.session.get('table')}}" />
+                    <button type="submit" class="vincent_button vincent_button_background" >Proceed to Order</button>
+                    </form>
+				</div>
+			</div>
+		
+		</div>
+	</div>
+
+	
+
+
+
+	<div class="vincent_back_to_top"></div>
+
+ {% endblock %}

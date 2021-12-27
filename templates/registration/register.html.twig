@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+
+{% block title %}Register{% endblock %}
+
+{% block navbar %}{% endblock %}
+
+{% block content %}
+
+<div class="container">
+    <div class="row">
+        
+        
+        
+            <div class="col-md-9 offset-md-2 my-3 ">
+                <div class="container col-md-6 offset-md-2 d-flex flex-column vh-100 justify-content-center">
+                    <div class="card bg-dark" >
+                        {% for flashError in app.flashes('verify_email_error') %}
+                            <div class="alert alert-danger" role="alert">{{ flashError }}</div>
+                        {% endfor %}
+                        <h1 class="text-center text-warning">Register</h1>
+                        {{ form_start(registrationForm, {attr: {"class" : "px-3"}} ) }}
+                            {{ form_row(registrationForm.first_name,  {attr: {"class" : "border border-2 border-warning"}}) }}
+                            {{ form_row(registrationForm.last_name,  {attr: {"class" : "border border-2 border-warning"}}) }}
+                            {{ form_row(registrationForm.email,  {attr: {"class" : "border border-2 border-warning"}}) }}
+                            {{ form_row(registrationForm.password, {
+                                label: 'Password'
+                            }) }}
+                            <div class="d-flex justify-content-center"><button type="submit" class="btn btn-outline-warning mt-4 w-50">Register</button></div>
+                        {{ form_end(registrationForm) }}
+                    </div>
+                </div>
+            </div>
+            <div class="col-1 p-3">
+                 <a href="{{path('home')}}" >  <span class="badge bg-warning text-dark p-3"> <i class="fas fa-undo me-2"></i>Home</span></a>
+           </div>
+    </div>
+</div>
+{% endblock %}

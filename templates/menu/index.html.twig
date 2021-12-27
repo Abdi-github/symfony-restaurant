@@ -6,7 +6,7 @@
 
 
 
- <div class="vincent_menu1_block">
+ <div class="vincent_menu1_block" style="margin-top: 10rem;">
 
                 <div class="vincent_container">
                     <div class="container">
@@ -34,7 +34,7 @@
                                                 <a class="vincent_add_to_cart_button" href="product.html"></a>
                                             </div>
                                         </div>
-                                        <h5><a href="product.html">{{d.name}}</a></h5>
+                                        <h5><a href="{{path('dish.detail', {'dish': d.id})}}">{{d.name}}</a></h5>
                                         <p class="vincent_prod_list_text">{{d.description}}</p>
                                         {% if d.discountedPrice > 0 %}
                                         <div class="vincent_prod_list_price fw-light text-decoration-line-through text-secondary mb-1"><span>CHF</span>{{d.price}}</div>

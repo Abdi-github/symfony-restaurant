@@ -19,8 +19,11 @@
     <link rel="stylesheet" href=" {{asset('css/kube.css')}}">
     <link rel="stylesheet" href=" {{asset('css/owl.carousel.min.css')}}">
     <link rel="stylesheet" href=" {{asset('css/style.css')}}">
+    <link rel="stylesheet" href=" {{asset('css/swipebox.css')}}">
 
     <script src="https://kit.fontawesome.com/01c24fcdad.js" crossorigin="anonymous"></script>
+
+    {% block js %}{% endblock %}
 
 
 
@@ -40,10 +43,146 @@
     <script src="{{asset('js/jquery.data-parallax.min.js')}}"></script>
     <script src="{{asset('js/owl.carousel.min.js')}}"></script>
     <script src="{{asset('js/kube.js')}}"></script>
+    <script src="{{asset('js/jquery.swipebox.js')}}"></script>
     <script src="{{asset('js/index.js')}}"></script>
 
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script>
+
+{# $(document).ready(function (){
+   $('.add_to_cart_btn').click(function (e){
+       e.preventDefault;
+
+       var product_id=$(this).closest('.product_data').find('.product_id').val();
+       var product_qty=$(this).closest('.product_data').find('.product_qty').val();
+
+       console.log()
+
+   })	
+
+}) #}
+
+// Add to Cart
+
+function addToCart() {
+    var product_id = $('#product_id').val();
+    var product_qty=$('#product_qty').val();
+    var table_no=$('#table_no').val();
+    var extra_cheese=$('#cheese option:selected').text();
+    var extra_onion=$('#onion option:selected').text();
+
+    console.log(product_id,product_qty, extra_cheese,extra_onion);
+
+   $.ajax({
+       type: "POST",
+                dataType: 'json',
+                data: {
+                    product_id: product_id,
+                    product_qty: product_qty,
+                    table_no:table_no,
+                    extra_cheese: extra_cheese,
+                    extra_onion: extra_onion, 
+                },
+               // url: "/cart/store/" + product_id + "/?table=" + table_id ,
+                url: "/cart/add/" + table_no + '/' + product_id   ,
+
+                success: function(res) {
+                    console.log(res);
+
+                    var total_price=parseFloat(res.total_price).toFixed(2); 
+
+                    $('#cart_total_qty').text(res.total_qty);   
+                    $('#cart_total_price').text(total_price);   
+                    $('#cart_items').text(res.count);   
+
+
+      
+
+                  }
+   })
+
+}
+
+// END Add to Cart
+
+
+
+
+// Display dynamic price on change of qty.
+
+$('#product_qty').change(function () {
+    var qty_entered = $('#product_qty').val();
+
+   var selling_price=$('.dynamic_price_input').val();
+   {# alert(selling_price); #}
+
+   var calculated_price = qty_entered * selling_price;
+
+   $('.dynamic_price').text(calculated_price);
+      
+        });
+
+// end dynamic price
+
+// Qty Update.
+
+$('.qty_update').change(function (e) {
+
+e.preventDefault();
+
+    // var product_qty = $('.qty_update').val();
+    var product_qty = $(this).closest('.cart_page').find('.qty_update').val();
+    var product_id = $(this).closest('.cart_page').find('.updated_product_id').val();
+    var product_price = $(this).closest('.cart_page').find('.product_selling_price').text();
+    var item_subtotal_price = $(this).closest('.cart_page').find('.item_subtotal_price').text();
+    var table_no = $('.table_no_update').val();
+    var $this = $(this);
+
+
+    {# alert(item_subtotal_price); #}
+
+
+       $.ajax({
+       type: "POST",
+                dataType: 'json',
+                data: {
+                    product_id: product_id,
+                    product_qty: product_qty,
+                    table_no:table_no,
+                 
+                },
+               // url: "/cart/store/" + product_id + "/?table=" + table_id ,
+                url: "/cart/update/" + table_no + '/' + product_id   ,
+
+                success: function(res) {
+                    {# console.log(res); #}
+
+                    {# window.location.reload(); #}
+
+
+                    var total_price=parseFloat(res.total_price).toFixed(2);
+                    var sub_total= product_qty * product_price; 
+
+                    $('#cart_total_qty').text(res.total_qty);   
+                    $('#cart_total_price').text(total_price);   
+                    $('#cart_items').text(res.count);
+                    $('#cart_items').text(res.count);
+                    $this.closest('.cart_page').find('.item_subtotal_price').text(sub_total);   
+                    $('#total_price_cart').text(total_price);    
+
+
+      
+
+                  }
+   })
+
+
+    });
+
+// END Qty Update.
+
+ 
+
         $('.delete-confirm').on('click', function(event) {
             event.preventDefault();
             const url = $(this).attr('href');
@@ -58,6 +197,10 @@
                 }
             });
         });
+
+
+
+        
     </script>
 
 </body>

@@ -1,0 +1,35 @@
+{% if carts %}	
+        	<div class="col col-3 vincent_header_right">
+				<div class="vincent_inner">
+					<a href="{{ path('cart')}}">
+
+                     <div class="vincent_shopping_cart">
+							<div class="vincent_total_price">CHF <span id="cart_total_price">{{total_price}}<span></div>
+                            <div class="vincent_total_items"><span  id="cart_items">{{carts | length}}</span> items - View Cart</div>
+							<div class="vincent_cart_item_counter" id="cart_total_qty">{{total_qty}}</div>
+	                 </div>
+
+					</a>
+				</div>			
+			</div>
+			{% else %}
+				<div class="col col-3 vincent_header_right">
+				<div class="vincent_inner">
+					<a href="">
+
+                     <div class="vincent_shopping_cart">
+							<div class="vincent_total_price"> <span id="cart_total_price"><span></div>
+                            <div class="vincent_total_items"><span  id="cart_items">No</span> items</div>
+							<div class="vincent_cart_item_counter" id="cart_total_qty"></div>
+	                 </div>
+
+					</a>
+				</div>			
+			</div>
+				
+{% endif %}
+          
+
+
+		
+		
